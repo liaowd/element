@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
-import { PopupManager } from 'element-ui/src/utils/popup';
+import { on, off } from '@liaowenda/element-ui/src/utils/dom';
+import { rafThrottle, isFirefox } from '@liaowenda/element-ui/src/utils/util';
+import { PopupManager } from '@liaowenda/element-ui/src/utils/popup';
 
 const Mode = {
   CONTAIN: {
