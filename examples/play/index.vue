@@ -1,6 +1,10 @@
 <template>
   <div style="margin: 20px;">
-    <el-input v-model="input" placeholder="请输入内容"></el-input>
+    <!-- filterable -->
+    <!-- allow-create -->
+    <el-select filterable allow-create select-single-input v-model="id" placeholder='请选择' @input="handleInput">
+      <el-option v-for="item in list" :key="item.id" :label="item.name" :value="item.id" />
+    </el-select>
   </div>
 </template>
 
@@ -8,8 +12,18 @@
   export default {
     data() {
       return {
-        input: 'Hello Element UI!'
+        id: '',
+        list: [ {
+            id: '3',
+            name: '司马sima',
+          }]
+
       };
+    },
+    methods: {
+      handleInput(val) {
+        console.log(val);
+      }
     }
   };
 </script>

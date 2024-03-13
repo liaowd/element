@@ -118,6 +118,7 @@
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
+            ref="elNewOption"
             :value="query"
             created
             v-if="showNewOption">
@@ -176,6 +177,10 @@
     },
 
     computed: {
+      // xinyu: 当联想结果只有 1 个时，失去光标，默认填充唯一结果到输入框
+      _blurSelect() {
+        return this.allowCreate && this.selectSingleInput && this.options.filter(option => option.visible).length === 1 && this.$refs.elNewOption;
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
@@ -277,6 +282,7 @@
       clearable: Boolean,
       filterable: Boolean,
       allowCreate: Boolean,
+      selectSingleInput: Boolean,
       loading: Boolean,
       popperClass: String,
       remote: Boolean,
@@ -597,6 +603,10 @@
             this.$emit('blur', event);
           }
         }, 50);
+        // 处理产品xinyu的需求：
+        if (this._blurSelect) {
+          this.handleOptionSelect(this.$refs.elNewOption, true);
+        }
         this.softFocus = false;
       },
 
